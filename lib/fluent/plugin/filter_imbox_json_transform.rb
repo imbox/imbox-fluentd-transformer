@@ -52,10 +52,11 @@ module Fluent
           child.delete('msg')
 
           record.merge!(child)
+          record.delete(@key) if @remove
         rescue JSON::ParserError => e
           record['message'] = record[@key]
+          record.delete(@key) if @remove
         end
-        record.delete(@key) if @remove
       end
 
       return record
