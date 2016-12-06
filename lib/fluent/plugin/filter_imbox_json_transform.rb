@@ -45,7 +45,7 @@ module Fluent
           child = JSON.parse(record[@key])
 
           child['@timestamp'] = child['time'] if child.key?('time')
-          child['level'] = @@levels[child['level']] if child.key?('level') && child['level'].is_a? Numeric
+          child['level'] = @@levels[child['level']] if child.key?('level') && child['level'].is_a?(Numeric)
           child['message'] = child['msg']
 
           child.delete('time')
