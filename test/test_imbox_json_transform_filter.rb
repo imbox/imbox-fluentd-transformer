@@ -53,7 +53,7 @@ class JsonMergeTest < Test::Unit::TestCase
         {"name":"agents-mobile-server",
           "hostname":"42e311aa6eb7",
           "pid":14,
-          "level":20,
+          "level":30,
           "msg":"Rabbitmq connection opened",
           "time":"2016-12-06T08:52:31.954Z",
           "v":0}
@@ -63,7 +63,7 @@ class JsonMergeTest < Test::Unit::TestCase
         "name" => "agents-mobile-server",
         "hostname" => "42e311aa6eb7",
         "pid" => 14,
-        "level" => "debug",
+        "level" => "info",
         "v" => 0,
         "@timestamp" => "2016-12-06T08:52:31.954Z",
         "message" => "Rabbitmq connection opened"
