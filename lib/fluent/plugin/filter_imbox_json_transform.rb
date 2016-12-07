@@ -17,7 +17,6 @@ module Fluent
       60 => 'fatal'
     }
 
-
     def configure(conf)
       super
     end
@@ -44,15 +43,23 @@ module Fluent
         begin
           child = JSON.parse(record[@key])
 
-          child['@timestamp'] = child['time'] if child.key?('time')
-          child['level'] = @@levels[child['level']] if child.key?('level') && child['level'].is_a?(Numeric)
-          child['message'] = child['msg']
+          if (child.key?('level'))
+            child['level'] = get_level(child['level'])
+          end
 
-          child.delete('time')
-          child.delete('msg')
+          if child.key?('msg')
+            child['message'] = child['msg']
+            child.delete('msg')
+          end
 
-          record.merge!(child)
+          if child.key?('time')
+            child['@timestamp'] = child['time']
+            child.delete('time')
+          end
+
           record.delete(@key) if @remove
+          record.merge!(child)
+
         rescue JSON::ParserError => e
           record['message'] = record[@key]
           record.delete(@key) if @remove
@@ -60,6 +67,14 @@ module Fluent
       end
 
       return record
+    end
+
+    def get_level(level)
+      if @@levels.key?(level)
+        @@levels[level]
+      else
+        level
+      end
     end
   end
 end
