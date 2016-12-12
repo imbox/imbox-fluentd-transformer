@@ -12,4 +12,15 @@ Expects this fields:
   - 60 => 'fatal'
 * message or msg
 
-If log is not JSON the data will be inserted into message field which is fine but then information about service name will be missing.
+If log is not JSON the data will be inserted into message field which is fine but then information about service name will be missing. To be able to distinguish services use of docker labels is supported. Labels will be merged into base structure. Example configuration in AWS ECS Task Definition:
+```
+"logConfiguration": {
+  "logDriver": "json-file",
+  "options": {
+    "labels": "name"
+  }
+},
+"dockerLabels": {
+  "name": "name of service"
+}
+```
