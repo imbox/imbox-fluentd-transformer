@@ -39,6 +39,19 @@ module Fluent
       # the user overrides filter_stream.
       #
       # If returns nil, that record is ignored.
+      record = merge_log(record)
+      merge_attrs(record)
+    end
+
+    def merge_attrs(record)
+      if record.has_key?('attrs')
+        record.merge!(record['attrs'])
+        record.delete('attrs')
+      end
+      record
+    end
+
+    def merge_log(record)
       if record.has_key? @key
         begin
           child = JSON.parse(record[@key])

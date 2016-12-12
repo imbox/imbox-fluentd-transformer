@@ -75,6 +75,39 @@ class JsonMergeTest < Test::Unit::TestCase
       assert_equal result, expected
     end
 
+    test 'merge attrs' do
+      record = {
+        'key' => 'value',
+        'attrs' => {
+          'name' => 'this is my name'
+        },
+        'log' => '
+        {"name":"agents-mobile-server",
+          "hostname":"42e311aa6eb7",
+          "pid":14,
+          "level":30,
+          "msg":"Rabbitmq connection opened",
+          "time":"2016-12-06T08:52:31.954Z",
+          "v":0}
+        '
+      }
+      expected = {
+        "key" => "value",
+        "name" => "this is my name",
+        "hostname" => "42e311aa6eb7",
+        "pid" => 14,
+        "level" => "info",
+        "v" => 0,
+        "@timestamp" => "2016-12-06T08:52:31.954Z",
+        "message" => "Rabbitmq connection opened"
+      }
+
+      d = create_driver('')
+      result = d.instance.filter('tag', 'time', record)
+
+      assert_equal result, expected
+    end
+
     test 'missing keys' do
       record = { 
         'key' => 'value',
