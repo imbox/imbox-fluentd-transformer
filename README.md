@@ -24,3 +24,11 @@ If log is not JSON the data will be inserted into message field which is fine bu
   "name": "name of service"
 }
 ```
+# Setup
+Requires ruby and bundler.
+
+To install dependencies:
+> $ bundle install
+
+Run tests:
+> $ rake test
