@@ -77,9 +77,16 @@ module Fluent
           record['message'] = record[@key]
           record.delete(@key) if @remove
         end
-      end
 
+        set_overrides(record)
+      end
       return record
+    end
+
+    def set_overrides(record)
+      if record.has_key?('stream') && record['stream'] == 'stderr'
+        record['level'] = 'error'
+      end
     end
 
     def get_level(level)

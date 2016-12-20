@@ -148,5 +148,27 @@ class JsonMergeTest < Test::Unit::TestCase
 
       assert_equal result, expected
     end
+
+    test 'stderr should set level to error' do
+      record = { 'key' => 'value',
+        'stream' => 'stderr',
+        'log' => 'This is a line',
+        'attrs' => {
+          'name' => 'this is my name'
+        }
+      }
+      expected = {
+        "key" => "value",
+        "level" => "error",
+        "message" => 'This is a line',
+        "stream" => "stderr",
+        "name" => "this is my name"
+      }
+
+      d = create_driver('')
+      result = d.instance.filter('tag', 'time', record)
+
+      assert_equal result, expected
+    end
   end
 end
