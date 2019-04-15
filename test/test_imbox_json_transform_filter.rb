@@ -133,6 +133,27 @@ class JsonMergeTest < Test::Unit::TestCase
       assert_equal expected, result
     end
 
+    test 'level as string' do
+      record = {
+        'key' => 'value',
+        'log' => '
+          {"level":"debug","msg":"message",
+            "name":"mail-triggers",
+            "time":"2019-04-15T10:55:10+02:00"}
+        '}
+      expected = {
+        'key' => 'value',
+        'level' => 'debug',
+        'name' => 'mail-triggers',
+        'message' => 'message'
+      }
+
+      d = create_driver('')
+      result = d.instance.filter('tag', 'time', record)
+
+      assert_equal expected, result
+    end
+
     test 'non JSON should be passed along' do
       record = {
         'key' => 'value',
