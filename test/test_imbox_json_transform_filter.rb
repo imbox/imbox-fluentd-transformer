@@ -72,7 +72,7 @@ class JsonMergeTest < Test::Unit::TestCase
       d = create_driver('')
       result = d.instance.filter('tag', 'time', record)
 
-      assert_equal result, expected
+      assert_equal expected, result
     end
 
     test 'merge attrs' do
@@ -105,7 +105,7 @@ class JsonMergeTest < Test::Unit::TestCase
       d = create_driver('')
       result = d.instance.filter('tag', 'time', record)
 
-      assert_equal result, expected
+      assert_equal expected, result
     end
 
     test 'missing keys' do
@@ -130,7 +130,7 @@ class JsonMergeTest < Test::Unit::TestCase
       d = create_driver('')
       result = d.instance.filter('tag', 'time', record)
 
-      assert_equal result, expected
+      assert_equal expected, result
     end
 
     test 'non JSON should be passed along' do
@@ -146,7 +146,7 @@ class JsonMergeTest < Test::Unit::TestCase
       d = create_driver('')
       result = d.instance.filter('tag', 'time', record)
 
-      assert_equal result, expected
+      assert_equal expected, result
     end
 
     test 'stderr should set level to error' do
@@ -168,7 +168,7 @@ class JsonMergeTest < Test::Unit::TestCase
       d = create_driver('')
       result = d.instance.filter('tag', 'time', record)
 
-      assert_equal result, expected
+      assert_equal expected, result
     end
   end
 end
