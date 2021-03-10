@@ -13,7 +13,7 @@ Expects this fields:
 * message or msg
 
 If log is not JSON the data will be inserted into message field which is fine but then information about service name will be missing. To be able to distinguish services use of docker labels is supported. Labels will be merged into base structure. Example configuration in AWS ECS Task Definition:
-```
+```json
 "logConfiguration": {
   "logDriver": "json-file",
   "options": {
@@ -24,11 +24,16 @@ If log is not JSON the data will be inserted into message field which is fine bu
   "name": "name of service"
 }
 ```
+
 # Setup
 Requires ruby and bundler.
 
 To install dependencies:
-> $ bundle install
+```bash
+$ bundle install --path=vendor/gems
+```
 
 Run tests:
-> $ rake test
+```bash
+$ bundle exec rake test
+```
