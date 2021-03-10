@@ -145,7 +145,8 @@ class JsonMergeTest < Test::Unit::TestCase
         'key' => 'value',
         'level' => 'debug',
         'name' => 'mail-triggers',
-        'message' => 'message'
+        'message' => 'message',
+        '@timestamp' => '2019-04-15T10:55:10+02:00'
       }
 
       d = create_driver('')
